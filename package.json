@@ -1,0 +1,23 @@
+{
+  "name": "port-relayer",
+  "version": "1.0.0",
+  "description": "reverse proxy port relay",
+  "main": "hostsMapToPorts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mutefish0/port-relayer.git"
+  },
+  "keywords": [
+    "reverse",
+    "proxy"
+  ],
+  "author": "mutefish0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mutefish0/port-relayer/issues"
+  },
+  "homepage": "https://github.com/Mutefish0/port-relayer#readme"
+}

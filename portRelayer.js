@@ -22,6 +22,9 @@ var server = http.createServer((req/*http.IncomingMessage*/,resp/*http.SeverResp
         })
     })
     _req.on('error',e=>{
+        _req.abort()
+        resp.statusCode = 500
+        resp.end()
         console.log(e)
     })
     //POST请求，先获取请求数据，然后发送
