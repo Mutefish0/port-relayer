@@ -22,11 +22,22 @@ var server = http.createServer((req/*http.IncomingMessage*/,resp/*http.SeverResp
         })
     })
     _req.on('error',e=>{
+        
+        //关闭请求
+
         _req.abort()
+
         resp.statusCode = 500
         resp.end()
-        console.log(e)
+        //console.log(e)
     })
+
+    _req.on('close',()=>{
+    
+        resp.end()
+        //console.log('Closed!')
+    })
+
     //POST请求，先获取请求数据，然后发送
     if(options.method==='POST'){
         //options已经写了headers,所以无需再设置headers
@@ -40,8 +51,12 @@ var server = http.createServer((req/*http.IncomingMessage*/,resp/*http.SeverResp
         })
     }
     //GET或其他请求，直接发送
-    else {
+    else if(options.method==='GET')
         _req.end()
+    else{
+
+        _req.abort()
+        resp.end()
     }
 
 })
