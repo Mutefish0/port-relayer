@@ -8,10 +8,15 @@ var server = http.createServer((req/*http.IncomingMessage*/,resp/*http.SeverResp
         method:req.method,
         path:req.url,
         headers:req.headers
-    }
+    },
+    _req 
+
+    resp.on('close',() => {
+        _req && _req.abort()
+    })
  
     /*   | ---- event 'response' <----- bind ------------------------------------------|  */                                                
-    var _req/*http.ClientRequest*/ = http.request(options,_resp/*http.IncomingMessage*/=>{
+    _req/*http.ClientRequest*/ = http.request(options,_resp/*http.IncomingMessage*/=>{
             /*impl Writable Stream*/
         resp.writeHead(_resp.statusCode,_resp.headers)
         _resp.on('data',chunk=>{
