@@ -18,7 +18,14 @@ var server = http.createServer((req/*http.IncomingMessage*/,resp/*http.SeverResp
     /*   | ---- event 'response' <----- bind ------------------------------------------|  */                                                
     _req/*http.ClientRequest*/ = http.request(options,_resp/*http.IncomingMessage*/=>{
             /*impl Writable Stream*/
-        resp.writeHead(_resp.statusCode,_resp.headers)
+        try{
+            resp.writeHead(_resp.statusCode,_resp.headers)
+        }
+        catch(e){
+            console.log(e)
+            console.log(_resp.headers)
+            resp.writeHead(_resp.statusCode)
+        }
         _resp.on('data',chunk=>{
             resp.write(chunk)
         })
